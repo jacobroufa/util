@@ -548,7 +548,13 @@ define([
 	bc.layerOptimize = fixupOptimize(bc.layerOptimize);
 
 	(function(){
+		var themesExist = dirExists(computePath("./themes", bc.basePath));
 		var fixedScopeMap = {dojo:"dojo", dijit:"dijit", dojox:"dojox"};
+
+		if (themesExist) {
+			fixedScopeMap.themes = "themes";
+		}
+
 		(bc.scopeMap || []).forEach(function(pair){
 			if(!pair[1]){
 				delete fixedScopeMap[pair[0]];
